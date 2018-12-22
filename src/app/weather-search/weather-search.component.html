@@ -1,0 +1,96 @@
+<div class="container">
+	<div class="row">
+	<div class="col-sm-12">
+		<h2 class="headline-css first-child text-color">
+		 <span class="border-color">Weather Forecast</span>
+	  </h2>
+	</div>
+	</div>
+</div>
+  <!-- Weather Search Input Form Start -->
+		<div class="color-jumbotron jumbotron-green">
+			<div class="container">
+			<div class="row">
+		        <div class="col-sm-12">
+		    		<form [formGroup]="weatherSearchForm"
+		    			  (ngSubmit)="OnWeatherSearchFormSubmit(weatherSearchForm)">
+			           <div id="custom-search-input">
+			            <div class="input-group col-md-12">
+			            	<div class="form-group">
+			                <input type="text" class="form-control input-lg" placeholder="Enter" formControlName="search">
+		                     <span style="margin-left: 17px;"
+		                       		 *ngIf="weatherSearchForm.controls['search'].hasError('required') && weatherSearchForm.controls['search'].touched" class="text-danger">
+		                   		  City Name is required
+		                     </span>
+		                     </div>
+			                <span class="input-group-btn">
+			                    <button class="btn btn-info btn-lg" type="submit">
+			                        <i class="glyphicon glyphicon-search"></i>
+			                    </button>
+										 </span>
+			            </div>
+			        </div>
+		          </form>
+		        </div>
+			</div>
+		  </div>
+		</div>
+  <!-- Weather Search Input Form End -->
+
+	<span class="loader-icon" *ngIf="loading">
+		<img src="https://i.gifer.com/9wcA.gif" alt="loading" />
+	</span>
+
+	<!-- Display Weather View  Start -->
+	<div class="col-md-12" *ngIf="!weatherAPIError">
+		<div class="container">
+		<div class="col-md-6">
+		<div class="weather-forecast-css" *ngIf="weatherData">
+    <h3 class="weather-forecast-css-text">5 day weather forecast</h3>
+      <table class="weather-forecast-css-table">
+      <tbody>
+         <tr class="weather-forecast-css-items" style="cursor:pointer;"
+				 		 [ngStyle]="{'background-color':i === 0 ? '#eee' : 'white'}"
+				 		 *ngFor="let weatherValue of weatherData; let i=index" (click)="weatheDetailView(weatherValue)">
+            <ng-container *ngIf="i<5">
+							<td class="weather-forecast-css-item">
+	               {{weatherValue.dt | date}}
+								 <img src="//openweathermap.org/img/w/{{weatherValue.weather[0].icon}}.png" alt="forecast">
+	               <div class="weather-forecast-css-today-label" *ngIf="i==0">Today</div>
+	            </td>
+	            <td class="weather-forecast-css-item">
+	               <p class="weather-forecast-css-card">
+									 <span class="weather-forecast-css-day">{{weatherValue.main.temp}} °C</span>
+									 <span class="">
+										 <b>{{weatherValue.weather[0].description | uppercase }}</b>
+									 </span>
+									 </p>
+	                 <p class="weather-forecast-css-card">
+									 {{weatherValue.wind.speed}} m/s&nbsp;<br>
+									 clouds:{{weatherValue.clouds.all}}%,{{weatherValue.main.pressure.toFixed(0)}} hpa
+								 </p>
+	            </td>
+						</ng-container>
+         </tr>
+      </tbody>
+   </table>
+    </div>
+	  </div>
+		<!-- Display Weather View  End -->
+
+    <!-- View Weather Detail Start -->
+	 <div class="col-md-6" *ngIf="weatherDetailBoolean">
+      <app-weather-detail [weatherInputData]="weatherView"></app-weather-detail>
+	 </div>
+	 <!-- View Weather Detail End -->
+ </div>
+  </div>
+	<!-- Display Weather View  End -->
+
+
+	<!-- API Error Display Message Start -->
+	<div class="container alert alert-warning" role="alert" *ngIf="weatherAPIError">
+		<a class="close" data-dismiss="alert" href="#">×</a>
+				Not found
+	</div>
+	<!-- API Error Display Message End -->

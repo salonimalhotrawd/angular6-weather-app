@@ -1,0 +1,40 @@
+<div class="detail-css container" *ngIf="weatherInputData">
+    <h2>Weather in {{weatherInputData.city}}</h2>
+    <h4>{{weatherInputData.dt | date}}</h4>
+      <h3 class="weather-widget__temperature">
+        <img class="weather-widget__img"
+             src="https://openweathermap.org/img/w/{{weatherInputData.weather[0].icon}}.png"
+             alt="{{weatherInputData.name}}"
+             width="50" height="50">
+            {{weatherInputData.main.temp}} °C
+      </h3>
+      <p class="weather-widget__main">
+        <b>{{weatherInputData.weather[0].description | uppercase }}</b>
+      </p>
+      <table class="table table-hover" id="contentToConvert">
+         <tbody>
+           <tr>
+             <td>Wind</td>
+             <td><b>{{weatherInputData.wind.speed}} m/s</b></td>
+           </tr>
+           <tr>
+             <td>Cloudiness</td>
+             <td><b>{{weatherInputData.clouds.all}}% </b></td>
+           </tr>
+           <tr>
+             <td>Pressure</td>
+             <td><b>{{weatherInputData.main.pressure.toFixed(0)}} hPa</b></td>
+           </tr>
+           <tr>
+             <td>Humidity</td>
+             <td><b>{{weatherInputData.main.humidity}}%</b></td>
+           </tr>
+           <tr>
+              <td>Geo coords</td>
+              <td>
+                <span style="color:#d6742d">[{{weatherInputData.lat}},{{weatherInputData.lon}}]</span>
+              </td>
+            </tr>
+         </tbody>
+   </table>
+ </div>
