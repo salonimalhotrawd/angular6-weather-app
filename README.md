@@ -21,7 +21,7 @@ The app is hosted on Heroku: https://angular-weather-forecast.herokuapp.com
 Assuming you have node, npm and git installed:
 
 1.In Git Bash:
-- $ git clone https://github.com/salonimalhotrawd/angular6-weather-app.git $
+- $ git clone https://github.com/salonimalhotrawd/angular6-weather-app.git 
 - cd angular6-weather-app
 -  $ npm install
 
