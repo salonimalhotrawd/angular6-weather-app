@@ -5,7 +5,7 @@ import { WeatherPageNotFoundComponent } from './weather-page-not-found/weather-p
 
 const appRoutes: Routes = [
   { path: 'find', component: WeatherSearchComponent },
-  { path: '',redirectTo: '/find',pathMatch: 'full'}
+  { path: '',redirectTo: '/find',pathMatch: 'full'},
   { path: '**', component: WeatherPageNotFoundComponent }
 ];
 
